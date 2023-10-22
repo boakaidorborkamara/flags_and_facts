@@ -24,9 +24,9 @@ window.onload = () => {
           <div class="card-body py-4">
             <h5 class="card-title">${ele.name.common}</h5>
             <div class="mt-4 mb-2">
-              <span><strong>Population:</strong> 3,323</span> <br />
-              <span><strong>Region:</strong> Europe</span><br />
-              <span><strong>Capital:</strong> Berlin</span><br />
+              <span><strong>Population: </strong>${ele.population}</span> <br />
+              <span><strong>Region: </strong>${ele.region}</span><br />
+              <span><strong>Capital: </strong>${ele.capital}</span><br />
             </div>
           </div>
       </div>
