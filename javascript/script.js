@@ -22,7 +22,7 @@ window.onload = () => {
           </div>
           
           <div class="card-body py-4">
-            <h5 class="card-title">Country Name</h5>
+            <h5 class="card-title">${ele.name.common}</h5>
             <div class="mt-4 mb-2">
               <span><strong>Population:</strong> 3,323</span> <br />
               <span><strong>Region:</strong> Europe</span><br />
@@ -31,7 +31,7 @@ window.onload = () => {
           </div>
       </div>
     `;
-        console.log(ele.flags.png);
+        console.log(ele);
         card_section.insertAdjacentHTML("beforeend", card);
       });
       
