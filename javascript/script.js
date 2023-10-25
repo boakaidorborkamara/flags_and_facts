@@ -1,22 +1,23 @@
 let card_section = document.getElementById("card-section");
 let search_input = document.getElementById("search-input");
-
+let filter_dropdown = document.getElementById("filter-dropdown");
 const BASE_URL = "https://restcountries.com";
+
+
 
 // start DOM manipulation and data fetching when DOM has loaded 
 window.addEventListener("load", async ()=>{
   let all_countries = await getCountry(BASE_URL+"/v3.1/all");
   displayCountry(all_countries);
   searchCountry(search_input);
+  filterCountry(filter_dropdown);
 })
 
 
 
+//DECLEARATION OF FUNCTIONS BELOW/////////////////////////////////////////////
 
-
-///////////////////////////////////////////////
-
-// fetch data from API and return it
+// accepts a url and fetches data from API using the endpoint and return it
 async function getCountry(url){
     try{
       let response = await fetch(url);
@@ -74,13 +75,24 @@ function displayCountry(data){
   });
 }
 
-//accept an html input field, and diplay countries that match user input
+//accept an html text input element, and diplay countries that match user input
 function searchCountry(html_text_input){
   html_text_input.addEventListener("input", async ()=>{
+    // user input 
     let country_to_search = search_input.value;
     let country = await getCountry(`https://restcountries.com/v3.1/name/${country_to_search}`);
    
     displayCountry(country);
+  })
+}
+
+//accepts an html dropdown list of region and filter based on user selected option
+function filterCountriesByRegion(html_dropdown_list){
+  html_dropdown_list.addEventListener("click", async (e)=>{
+     // user selected region 
+     let selected_region = e.target.innerText;
+     let country = await getCountry(`https://restcountries.com/v3.1/region/${selected_region}`);
+     displayCountry(country);
   })
 }
        
