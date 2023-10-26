@@ -20,18 +20,8 @@ window.addEventListener("load", async ()=>{
   displayCountryCards(all_countries);
   searchCountry(search_input);
   filterCountriesByRegion(filter_dropdown);
-  toggleTheme(theme_btn);
-
-  
-  for(let i=0; i<cards.length; i++){
-    cards[i].addEventListener("click", async ()=>{
-      let selected_card = cards[i];
-      let selected_country = selected_card.id;
-      let selected_country_details = await getCountry(BASE_URL+"/v3.1/name/"+selected_country);
-      displayCountryDetails(selected_country_details);
-    })
-  }
-  
+  toggleTheme(theme_btn); 
+  // makeCardsClickable();
 })
 
 
@@ -91,6 +81,8 @@ function displayCountryCards(data){
     //add new cards to DOM 
     card_section.insertAdjacentHTML("beforeend", card);
   });
+
+  makeCardsClickable();
 }
 
 //accept an html text input element, and diplay countries that match user input
@@ -100,7 +92,7 @@ function searchCountry(html_text_input){
     let country_to_search = search_input.value;
     let country = await getCountry(`https://restcountries.com/v3.1/name/${country_to_search}`);
    
-    displayCountry(country);
+    displayCountryCards(country);
   })
 }
 
@@ -161,7 +153,7 @@ function toggleTheme(btn){
 
 }
 
-//accept a an array of countries and create bootsrap cards displying them to the DOM 
+
 function displayCountryDetails(data){
   // hide current esisting element from the DOM 
   filter_section.classList.remove("d-flex");
@@ -189,14 +181,13 @@ function displayCountryDetails(data){
             <img src="${ele.flags.svg}" alt="placeholder image" class="w-100 h-100">
           </div>
           <div class="m-4  d-flex flex-column justify-content-center">
-            <h2 class="fs-1">${ele.name.common}</h2>
+            <h2 class="fs-1"><strong>${ele.name.common}</strong></h2>
             <div >
-              <p class="m-0">Capital: text 1</p>
-              <p class="m-0">Population: text 2</p>
-              <p class="m-0">Language:</p>
-              <p class="m-0">Continent:</p>
-              <p class="m-0">Region:</p>
-              <p class="m-0">Sub Region:</p>
+              <p class="m-0 text-muted"><strong>Capital:</strong> ${ele.capital}</p>
+              <p class="m-0 text-muted"><strong>Population:</strong> ${ele.population}</p>
+              <p class="m-0 text-muted"><strong>Continent:</strong> ${ele.continents}</p>
+              <p class="m-0 text-muted"><strong>Region:</strong> ${ele.continents}</p>
+              <p class="m-0 text-muted"><strong>Sub Region:</strong> ${ele.subregion}</p>
             </div>
           </div>
           
@@ -213,6 +204,17 @@ function displayCountryDetails(data){
     //display card section to the DOM 
     main_container.insertAdjacentHTML("beforeend", details_section);
   });
+}
+
+function makeCardsClickable(){
+  for(let i=0; i<cards.length; i++){
+    cards[i].addEventListener("click", async ()=>{
+      let selected_card = cards[i];
+      let selected_country = selected_card.id;
+      let selected_country_details = await getCountry(BASE_URL+"/v3.1/name/"+selected_country);
+      displayCountryDetails(selected_country_details);
+    })
+  }
 }
 
 
