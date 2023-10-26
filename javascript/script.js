@@ -53,16 +53,13 @@ function displayCountry(data){
   data.forEach(ele => {
     // HTML card template 
     let card = `
-    <div class="card shadow-sm border-0 mb-5" style="width: 18rem">
+    <div class="card shadow-sm border-0 mb-5" style="width: 18rem" id="${ele.name.common}">
         <div class="h-75">
-          <a href="">
             <img
             class="card-img-top w-100 h-100" 
             src="${ele.flags.png?ele.flags.png:"./images/download.svg"}"
             alt="Card image cap"
             />
-          </a>
-          
         </div>
         
         <div class="card-body py-4">

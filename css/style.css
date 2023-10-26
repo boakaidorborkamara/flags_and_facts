@@ -5,3 +5,7 @@
 .body-background-dark{
   background-color: #1e2226;
 }
+
+.card:hover{
+  cursor: pointer;
+}
