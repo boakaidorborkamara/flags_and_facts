@@ -1,12 +1,10 @@
 let body = document.getElementsByTagName("body");
 let header = document.getElementsByTagName("header");
 let main_container = document.getElementById("main-container");
-console.log(main_container);
 let card_section = document.getElementById("card-section");
 let cards = document.getElementsByClassName("card");
 let search_input = document.getElementById("search-input");
 let filter_section = document.getElementById("filter-section");
-console.log(filter_section);
 let filter_dropdown = document.getElementById("filter-dropdown");
 let theme_btn = document.getElementById("theme-btn");
 let theme_bnt_text = document.getElementById("theme-btn-text")
@@ -63,17 +61,17 @@ function displayCountryCards(data){
         <div class="h-75">
             <img
             class="card-img-top w-100 h-100" 
-            src="${ele.flags.png?ele.flags.png:"./images/download.svg"}"
+            src="${ele.flags.png?ele.flags.svg:"./images/download.svg"}"
             alt="Card image cap"
             />
         </div>
         
         <div class="card-body py-4">
-          <h5 class="card-title">${ele.name.common}</h5>
+          <h5 class="card-title fw-bold">${ele.name.common}</h5>
           <div class="mt-4 mb-2">
-            <span><strong>Population: </strong>${ele.population}</span> <br />
-            <span><strong>Region: </strong>${ele.region}</span><br />
-            <span><strong>Capital: </strong>${ele.capital}</span><br />
+            <span class="text-muted"><strong>Population: </strong>${ele.population}</span> <br />
+            <span class="text-muted"><strong>Region: </strong>${ele.region}</span><br />
+            <span class="text-muted"><strong>Capital: </strong>${ele.capital}</span><br />
           </div>
         </div>
     </div>`;
@@ -161,7 +159,7 @@ function displayCountryDetails(data){
   filter_section.classList.add("d-none");
   card_section.classList.add("d-none");
 
-  // create new cards from fetched countries
+  // create and display new DOM elements with selected country details
   data.forEach(ele => {
     console.log("ele", ele);
     // HTML card template 
@@ -171,7 +169,7 @@ function displayCountryDetails(data){
         <section class="d-flex justify-content-between my-5">
           <!-- back btn  -->
           <div class=" mb-3 ">
-            <a href="#" class="btn btn-secondary btn-sm active shadow-sm" role="button" aria-pressed="true">Go Back</a>
+            <button type="button" class="btn   btn-secondary btn-sm shadow-sm" id="back-btn">Take Me Back</button>
           </div>
         </section>
 
@@ -204,6 +202,9 @@ function displayCountryDetails(data){
     //display card section to the DOM 
     main_container.insertAdjacentHTML("beforeend", details_section);
   });
+
+  //add enable back button in newly created elements to take user back to the homepage
+  returnToHomeScreen();
 }
 
 function makeCardsClickable(){
@@ -215,6 +216,13 @@ function makeCardsClickable(){
       displayCountryDetails(selected_country_details);
     })
   }
+}
+
+function returnToHomeScreen(){
+  let back_btn = document.getElementById("back-btn");
+  back_btn.addEventListener("click", async()=>{
+    console.log("clicked");
+  })
 }
 
 
