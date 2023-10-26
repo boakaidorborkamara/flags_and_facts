@@ -1,7 +1,12 @@
 let body = document.getElementsByTagName("body");
 let header = document.getElementsByTagName("header");
+let main_container = document.getElementById("main-container");
+console.log(main_container);
 let card_section = document.getElementById("card-section");
+let cards = document.getElementsByClassName("card");
 let search_input = document.getElementById("search-input");
+let filter_section = document.getElementById("filter-section");
+console.log(filter_section);
 let filter_dropdown = document.getElementById("filter-dropdown");
 let theme_btn = document.getElementById("theme-btn");
 let theme_bnt_text = document.getElementById("theme-btn-text")
@@ -12,10 +17,21 @@ const BASE_URL = "https://restcountries.com";
 // start DOM manipulation and data fetching when DOM has loaded 
 window.addEventListener("load", async ()=>{
   let all_countries = await getCountry(BASE_URL+"/v3.1/all");
-  displayCountry(all_countries);
+  displayCountryCards(all_countries);
   searchCountry(search_input);
   filterCountriesByRegion(filter_dropdown);
   toggleTheme(theme_btn);
+
+  
+  for(let i=0; i<cards.length; i++){
+    cards[i].addEventListener("click", async ()=>{
+      let selected_card = cards[i];
+      let selected_country = selected_card.id;
+      let selected_country_details = await getCountry(BASE_URL+"/v3.1/name/"+selected_country);
+      displayCountryDetails(selected_country_details);
+    })
+  }
+  
 })
 
 
@@ -43,7 +59,7 @@ async function getCountry(url){
 };
 
 //accept a an array of countries and create bootsrap cards displying them to the DOM 
-function displayCountry(data){
+function displayCountryCards(data){
   // Delete existing cards from the DOM if there's any 
   while (card_section.firstChild) {
     card_section.removeChild(card_section.firstChild);
@@ -144,6 +160,63 @@ function toggleTheme(btn){
   })
 
 }
+
+//accept a an array of countries and create bootsrap cards displying them to the DOM 
+function displayCountryDetails(data){
+  // hide current esisting element from the DOM 
+  filter_section.classList.remove("d-flex");
+  card_section.classList.remove("d-flex");
+  filter_section.classList.add("d-none");
+  card_section.classList.add("d-none");
+
+  // create new cards from fetched countries
+  data.forEach(ele => {
+    console.log("ele", ele);
+    // HTML card template 
+    let details_section = `
+      <section>
+        <!-- back btn section  -->
+        <section class="d-flex justify-content-between my-5">
+          <!-- back btn  -->
+          <div class=" mb-3 ">
+            <a href="#" class="btn btn-secondary btn-sm active shadow-sm" role="button" aria-pressed="true">Go Back</a>
+          </div>
+        </section>
+
+        <!-- details  -->
+        <section class="d-flex  flex-wrap">
+          <div class="w-50 bg-danger border">
+            <img src="${ele.flags.svg}" alt="placeholder image" class="w-100 h-100">
+          </div>
+          <div class="m-4  d-flex flex-column justify-content-center">
+            <h2 class="fs-1">${ele.name.common}</h2>
+            <div >
+              <p class="m-0">Capital: text 1</p>
+              <p class="m-0">Population: text 2</p>
+              <p class="m-0">Language:</p>
+              <p class="m-0">Continent:</p>
+              <p class="m-0">Region:</p>
+              <p class="m-0">Sub Region:</p>
+            </div>
+          </div>
+          
+        </section>
+      </section>    
+    `;
+
+    // hide current esisting element from the DOM 
+    filter_section.classList.remove("d-flex");
+    card_section.classList.remove("d-flec");
+    filter_section.classList.add("d-none");
+    filter_section.classList.add("d-none");
+
+    //display card section to the DOM 
+    main_container.insertAdjacentHTML("beforeend", details_section);
+  });
+}
+
+
+
        
 
 
