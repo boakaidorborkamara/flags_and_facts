@@ -1,3 +1,7 @@
-body {
+.body-background-light {
   background-color: #f3f3f3;
+}
+
+.body-background-dark{
+  background-color: #212529;
 }
