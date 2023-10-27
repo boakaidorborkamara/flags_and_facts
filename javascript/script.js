@@ -164,7 +164,7 @@ function displayCountryDetails(data){
     console.log("ele", ele);
     // HTML card template 
     let details_section = `
-      <section>
+      <section id="details-section-element">
         <!-- back btn section  -->
         <section class="d-flex justify-content-between my-5">
           <!-- back btn  -->
@@ -195,7 +195,7 @@ function displayCountryDetails(data){
 
     // hide current esisting element from the DOM 
     filter_section.classList.remove("d-flex");
-    card_section.classList.remove("d-flec");
+    card_section.classList.remove("d-flex");
     filter_section.classList.add("d-none");
     filter_section.classList.add("d-none");
 
@@ -204,6 +204,7 @@ function displayCountryDetails(data){
   });
 
   //add enable back button in newly created elements to take user back to the homepage
+  console.log("adding fx to return btn")
   returnToHomeScreen();
 }
 
@@ -219,10 +220,24 @@ function makeCardsClickable(){
 }
 
 function returnToHomeScreen(){
+  console.log("now in the returnToHomeScreen fnx")
   let back_btn = document.getElementById("back-btn");
+  let details_section_element = document.getElementById("details-section-element");
+  console.log("back btn", back_btn.classList);
+  console.log("details_section_element", details_section_element.classList);
+  console.log("adding event listener")
+  
   back_btn.addEventListener("click", async()=>{
     console.log("clicked");
-  })
+    console.log(card_section);
+    details_section_element.classList.add("d-none");
+    filter_section.classList.remove("d-none");
+    filter_section.classList.add("d-flex");
+    card_section.classList.remove("d-none");
+    card_section.classList.add("d-flex"); 
+  });
+
+  console.log("event added")
 }
 
 
