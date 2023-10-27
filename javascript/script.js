@@ -199,9 +199,10 @@ function displayCountryDetails(data){
     filter_section.classList.add("d-none");
     filter_section.classList.add("d-none");
 
-    //display card section to the DOM 
+    //display details section to the DOM 
     main_container.insertAdjacentHTML("beforeend", details_section);
 
+    // add event listener to back btn on country details page 
     returnToHomeScreen();
   });
 
@@ -222,8 +223,9 @@ function returnToHomeScreen(){
   console.log("now in the returnToHomeScreen fnx")
   let back_btn = document.getElementById("back-btn");
   let details_section_element = document.getElementById("details-section-element");
-  console.log("back btn", back_btn.classList);
-  console.log("details_section_element", details_section_element.classList);
+  details_section_element.classList.remove("d-none");
+  console.log("back btn CLASSES", back_btn.className);
+  console.log("details_section_element CLASSES", details_section_element.className);
   console.log("adding event listener")
   
   back_btn.addEventListener("click", async()=>{
