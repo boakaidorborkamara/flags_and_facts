@@ -6,6 +6,10 @@
   background-color: #1e2226;
 }
 
+#logo{
+  cursor: pointer;
+}
+
 .card:hover{
   cursor: pointer;
 }

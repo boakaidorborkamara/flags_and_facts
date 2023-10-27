@@ -1,5 +1,6 @@
 let body = document.getElementsByTagName("body");
 let header = document.getElementsByTagName("header");
+let logo = document.getElementById("logo");
 let main_container = document.getElementById("main-container");
 let card_section = document.getElementById("card-section");
 let cards = document.getElementsByClassName("card");
@@ -7,24 +8,36 @@ let search_input = document.getElementById("search-input");
 let filter_section = document.getElementById("filter-section");
 let filter_dropdown = document.getElementById("filter-dropdown");
 let theme_btn = document.getElementById("theme-btn");
-let theme_bnt_text = document.getElementById("theme-btn-text")
+let theme_bnt_text = document.getElementById("theme-btn-text");
+
 const BASE_URL = "https://restcountries.com";
 
 
 
 // start DOM manipulation and data fetching when DOM has loaded 
 window.addEventListener("load", async ()=>{
-  let all_countries = await getCountry(BASE_URL+"/v3.1/all");
-  displayCountryCards(all_countries);
+  initializeApp();// load and display data when app starts 
   searchCountry(search_input);
   filterCountriesByRegion(filter_dropdown);
-  toggleTheme(theme_btn); 
-  // makeCardsClickable();
+  toggleTheme(theme_btn);
+  reloadApp(logo);
 })
 
 
 
 //DECLEARATION OF FUNCTIONS BELOW/////////////////////////////////////////////
+// fetch and display data on initial load 
+async function initializeApp(){
+  let all_countries = await getCountry(BASE_URL+"/v3.1/all");
+  displayCountryCards(all_countries);
+}
+
+// reloads the app and reset filter and search 
+async function reloadApp(btn){
+  btn.addEventListener("click", async ()=>{
+    initializeApp();
+  })
+}
 
 // accepts a url and fetches data from API using the endpoint and return it
 async function getCountry(url){
