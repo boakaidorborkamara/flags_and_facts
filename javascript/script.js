@@ -100,7 +100,7 @@ function filterCountriesByRegion(html_dropdown_list){
      // user selected region 
      let selected_region = e.target.innerText;
      let country = await getCountry(`https://restcountries.com/v3.1/region/${selected_region}`);
-     displayCountry(country);
+     displayCountryCards(country);
   })
 }
 
@@ -201,11 +201,10 @@ function displayCountryDetails(data){
 
     //display card section to the DOM 
     main_container.insertAdjacentHTML("beforeend", details_section);
+
+    returnToHomeScreen();
   });
 
-  //add enable back button in newly created elements to take user back to the homepage
-  console.log("adding fx to return btn")
-  returnToHomeScreen();
 }
 
 function makeCardsClickable(){
