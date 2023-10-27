@@ -36,7 +36,6 @@ async function getCountry(url){
       }
 
       let data = await response.json();
-      console.log(data);
       return data;
     }
     catch(error){
@@ -151,17 +150,24 @@ function toggleTheme(btn){
 
 }
 
-
+//display the details of the country for the card that user clicked
 function displayCountryDetails(data){
+  let details_section_element = document.getElementById("details-section-element");
+
   // hide current esisting element from the DOM 
   filter_section.classList.remove("d-flex");
   card_section.classList.remove("d-flex");
   filter_section.classList.add("d-none");
   card_section.classList.add("d-none");
 
+  //remove duplicates of details section element during toggle between home page
+  if(details_section_element !== null){
+    details_section_element.remove();
+  }
+
+
   // create and display new DOM elements with selected country details
   data.forEach(ele => {
-    console.log("ele", ele);
     // HTML card template 
     let details_section = `
       <section id="details-section-element">
@@ -208,6 +214,7 @@ function displayCountryDetails(data){
 
 }
 
+//Allow country details to be displayed when a specific card is clicked
 function makeCardsClickable(){
   for(let i=0; i<cards.length; i++){
     cards[i].addEventListener("click", async ()=>{
@@ -219,18 +226,14 @@ function makeCardsClickable(){
   }
 }
 
+//Allow user to be taken back to the home page when the back btn on the details page is clicked
 function returnToHomeScreen(){
-  console.log("now in the returnToHomeScreen fnx")
   let back_btn = document.getElementById("back-btn");
   let details_section_element = document.getElementById("details-section-element");
   details_section_element.classList.remove("d-none");
-  console.log("back btn CLASSES", back_btn.className);
-  console.log("details_section_element CLASSES", details_section_element.className);
-  console.log("adding event listener")
+
   
   back_btn.addEventListener("click", async()=>{
-    console.log("clicked");
-    console.log(card_section);
     details_section_element.classList.add("d-none");
     filter_section.classList.remove("d-none");
     filter_section.classList.add("d-flex");
@@ -238,7 +241,6 @@ function returnToHomeScreen(){
     card_section.classList.add("d-flex"); 
   });
 
-  console.log("event added")
 }
 
 
