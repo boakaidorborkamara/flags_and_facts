@@ -4,6 +4,13 @@
 
 .body-background-dark{
   background-color: #1e2226;
+}
+
+.body-background-dark h2{
+  color: wheat !important;
+}
+
+.body-background-dark p{
   color: white !important;
 }
 

@@ -11,9 +11,7 @@ let theme_btn = document.getElementById("theme-btn");
 let theme_bnt_text = document.getElementById("theme-btn-text");
 let details_section_element = document.getElementById("details-section-element");
 
-
 const BASE_URL = "https://restcountries.com";
-
 
 
 // start DOM manipulation and data fetching when DOM has loaded 
@@ -26,15 +24,15 @@ window.addEventListener("load", async ()=>{
 })
 
 
+//=============================================================================
 
-//DECLEARATION OF FUNCTIONS BELOW/////////////////////////////////////////////
 // fetch and display data on initial load 
 async function initializeApp(){
   let all_countries = await getCountry(BASE_URL+"/v3.1/all");
   displayCountryCards(all_countries);
 }
 
-// reloads the app and reset filter and search 
+// reloads the app and reset filter and search when the logo btn is clicked
 async function reloadApp(btn){
   btn.addEventListener("click", async ()=>{
     initializeApp();
@@ -60,7 +58,7 @@ async function getCountry(url){
     }
 };
 
-//accept a an array of countries and create bootsrap cards displying them to the DOM 
+//accepts a an array of countries and create bootstrap cards displying them to the DOM 
 function displayCountryCards(data){
   // Delete existing cards from the DOM if there's any 
   while (card_section.firstChild) {
@@ -97,7 +95,7 @@ function displayCountryCards(data){
   makeCardsClickable();
 }
 
-//accept an html text input element, and diplay countries that match user input
+//accepts an html text input element, and diplay countries that match user input
 function searchCountry(html_text_input){
   html_text_input.addEventListener("input", async ()=>{
     // user input 
@@ -132,7 +130,7 @@ function toggleTheme(btn){
       body[0].classList.remove("body-background-light");
       header[0].classList.remove("bg-light");
       header[0].classList.remove("text-dark");
-      theme_btn.classList.remove("text-dark");
+      theme_btn.classList.remove("text-dark");      
       
 
       // and change styling to match dark mode 
@@ -168,8 +166,6 @@ function toggleTheme(btn){
 
 //display the details of the country for the card that user clicked
 function displayCountryDetails(data){
-  // let details_section_element = document.getElementById("details-section-element");
-
   // hide current esisting element from the DOM 
   filter_section.classList.remove("d-flex");
   card_section.classList.remove("d-flex");
