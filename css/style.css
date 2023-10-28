@@ -18,6 +18,21 @@
   cursor: pointer;
 }
 
+.w-lg-23{
+  width: 23%;
+}
+
+.card{
+  box-sizing: border-box !important;
+
+}
 .card:hover{
   cursor: pointer;
 }
+
+/* @media screen and (min-width:1024px) {
+  body{
+    background-color: red !important;
+  }
+  
+} */

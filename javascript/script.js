@@ -69,7 +69,7 @@ function displayCountryCards(data){
   data.forEach(ele => {
     // HTML card template 
     let card = `
-    <div class="card shadow-sm border-0 " style="width: 18rem" id="${ele.name.common}">
+    <div class=" col-md-5 col-lg-2 card shadow-sm border-0 "  id="${ele.name.common}">
         <div class="h-75">
             <img
             class="card-img-top w-100 h-100" 
