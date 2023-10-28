@@ -9,6 +9,8 @@ let filter_section = document.getElementById("filter-section");
 let filter_dropdown = document.getElementById("filter-dropdown");
 let theme_btn = document.getElementById("theme-btn");
 let theme_bnt_text = document.getElementById("theme-btn-text");
+let details_section_element = document.getElementById("details-section-element");
+
 
 const BASE_URL = "https://restcountries.com";
 
@@ -131,6 +133,7 @@ function toggleTheme(btn){
       header[0].classList.remove("bg-light");
       header[0].classList.remove("text-dark");
       theme_btn.classList.remove("text-dark");
+      
 
       // and change styling to match dark mode 
       body[0].classList.add("body-background-dark");
@@ -165,7 +168,7 @@ function toggleTheme(btn){
 
 //display the details of the country for the card that user clicked
 function displayCountryDetails(data){
-  let details_section_element = document.getElementById("details-section-element");
+  // let details_section_element = document.getElementById("details-section-element");
 
   // hide current esisting element from the DOM 
   filter_section.classList.remove("d-flex");
@@ -242,7 +245,7 @@ function makeCardsClickable(){
 //Allow user to be taken back to the home page when the back btn on the details page is clicked
 function returnToHomeScreen(){
   let back_btn = document.getElementById("back-btn");
-  let details_section_element = document.getElementById("details-section-element");
+  details_section_element = document.getElementById("details-section-element");
   details_section_element.classList.remove("d-none");
 
   

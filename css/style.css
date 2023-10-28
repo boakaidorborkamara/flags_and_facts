@@ -4,6 +4,7 @@
 
 .body-background-dark{
   background-color: #1e2226;
+  color: white !important;
 }
 
 #logo{
