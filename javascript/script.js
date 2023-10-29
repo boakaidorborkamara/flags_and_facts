@@ -193,7 +193,7 @@ function displayCountryDetails(data){
 
         <!-- details  -->
         <section class="d-flex  flex-wrap">
-          <div class="w-50 bg-danger border">
+          <div class="col-lg-6 col-md-12 bg-danger border">
             <img src="${ele.flags.svg}" alt="placeholder image" class="w-100 h-100">
           </div>
           <div class="m-4  d-flex flex-column justify-content-center">
